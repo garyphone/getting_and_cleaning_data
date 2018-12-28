@@ -25,3 +25,24 @@ load_packages <- function(...) {
         sapply(packages, require, character.only = TRUE, quietly = TRUE)
 }
 
+# check if there is such a file in the current directory. if the file is not found,
+# it will be downloaded and saved.
+# parameters:
+# fname .. filename 
+# url .. download link
+download_if_not_exists <- function(fname, url) {
+        if (!file.exists(fname)) 
+                download.file(url, destfile = fname, method = "curl")  
+}
+
+# print a message to stdout 
+# parameters:
+# ellipsis .. an arbitrary number of parts comprising the final message
+msg <- function(...) {
+        print(paste(..., sep = " "))
+}
+
+# turn a collection into a comma separated string
+stringify <- function(col) {
+        paste(as.character(col), collapse = ", ")
+}
